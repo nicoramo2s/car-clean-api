@@ -1,0 +1,10 @@
+PHPUnit 12.5.8 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.17
+Configuration: C:\laragon\www\CarClean\phpunit.xml
+
+................                                                  16 / 16 (100%)
+
+Time: 00:00.858, Memory: 56.00 MB
+
+OK (16 tests, 48 assertions)
