@@ -15,11 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sale_id')->constrained()->cascadeOnDelete();
             $table->foreignId('service_id')->constrained()->restrictOnDelete();
-
-            $table->string('description');
-            $table->decimal('quantity', 8, 2)->default(1);
-            $table->decimal('unit_price', 12, 2);
-            $table->decimal('total', 12, 2);
             $table->timestamps();
         });
     }

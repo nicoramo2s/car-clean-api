@@ -1,11 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Sales extends Model
+class Sale extends Model
 {
     /** @use HasFactory<\Database\Factories\SalesFactory> */
     use HasFactory;
@@ -22,32 +27,33 @@ class Sales extends Model
     ];
 
     protected $casts = [
+        'subtotal' => 'float',
+        'total' => 'float',
         'paid_at' => 'datetime',
-        'subtotal' => 'decimal:2',
-        'total' => 'decimal:2',
+        'should_invoice' => 'boolean',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function client()
+    public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);
     }
 
-    public function vehicle()
+    public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
     }
 
-    public function items()
+    public function items(): HasMany
     {
         return $this->hasMany(SalesItem::class);
     }
 
-    public function electronicInvoice()
+    public function electronicInvoice(): HasOne
     {
         return $this->hasOne(ElectronicInvoice::class);
     }

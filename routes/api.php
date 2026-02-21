@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Http\Request;
@@ -20,5 +21,6 @@ Route::prefix('/v1')->group(function () {
         Route::apiResource('/clients', ClientController::class);
         Route::apiResource('/vehicles', VehicleController::class);
         Route::apiResource('/services', ServiceController::class);
+        Route::apiResource('/sales', SaleController::class);
     });
 });

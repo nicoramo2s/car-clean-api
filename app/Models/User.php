@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -51,27 +54,27 @@ class User extends Authenticatable implements Auditable
         ];
     }
 
-    public function clients()
+    public function clients(): HasMany
     {
         return $this->hasMany(Client::class);
     }
 
-    public function vehicles()
+    public function vehicles(): HasMany
     {
         return $this->hasMany(Vehicle::class);
     }
 
-    public function services()
+    public function services(): HasMany
     {
         return $this->hasMany(Service::class);
     }
 
-    public function sales()
+    public function sales(): HasMany
     {
-        return $this->hasMany(Sales::class);
+        return $this->hasMany(Sale::class);
     }
 
-    public function electronicInvoices()
+    public function electronicInvoices(): HasMany
     {
         return $this->hasMany(ElectronicInvoice::class);
     }

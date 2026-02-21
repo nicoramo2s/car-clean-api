@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class SalesItem extends Model
 {
@@ -13,24 +16,19 @@ class SalesItem extends Model
     protected $fillable = [
         'sale_id',
         'service_id',
-        'description',
-        'quantity',
         'unit_price',
-        'total',
     ];
 
     protected $casts = [
-        'quantity' => 'decimal:2',
-        'unit_price' => 'decimal:2',
-        'total' => 'decimal:2',
+        'unit_price' => 'float',
     ];
 
-    public function sale()
+    public function sale(): BelongsTo
     {
-        return $this->belongsTo(Sales::class);
+        return $this->belongsTo(Sale::class);
     }
 
-    public function service()
+    public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
     }

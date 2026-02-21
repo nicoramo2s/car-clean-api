@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ElectronicInvoice extends Model
 {
@@ -22,12 +25,12 @@ class ElectronicInvoice extends Model
         'arca_response' => 'array',
     ];
 
-    public function sale()
+    public function sale(): BelongsTo
     {
-        return $this->belongsTo(Sales::class);
+        return $this->belongsTo(Sale::class);
     }
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

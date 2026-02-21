@@ -25,8 +25,9 @@ return new class extends Migration
 
             $table->boolean('should_invoice')->default(false);
 
-            $table->index(['user_id', 'paid_at']);
             $table->timestamps();
+
+            $table->index(['user_id', 'paid_at']);
         });
     }
 
