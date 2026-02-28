@@ -20,7 +20,18 @@ class ServiceController extends Controller
     ) {}
 
     /**
-     * Display a listing of the resource.
+     * @OA\Get(
+     *     path="/api/v1/services",
+     *     summary="List all services with pagination",
+     *     tags={"Services"},
+     *     security={{"sanctum": {}}},
+     *
+     *     @OA\Parameter(name="name", in="query", @OA\Schema(type="string")),
+     *     @OA\Parameter(name="page", in="query", @OA\Schema(type="integer")),
+     *     @OA\Parameter(name="per_page", in="query", @OA\Schema(type="integer")),
+     *
+     *     @OA\Response(response=200, description="Successful operation")
+     * )
      */
     public function index(Request $request): JsonResponse
     {
@@ -34,7 +45,26 @@ class ServiceController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/v1/services",
+     *     summary="Create a new service",
+     *     tags={"Services"},
+     *     security={{"sanctum": {}}},
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(
+     *             required={"name", "price"},
+     *
+     *             @OA\Property(property="name", type="string", example="Basic Wash"),
+     *             @OA\Property(property="price", type="number", format="float", example=25.00),
+     *             @OA\Property(property="description", type="string", example="Exterior wash and dry")
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response=201, description="Service created successfully")
+     * )
      */
     public function store(StoreServiceRequest $request): JsonResponse
     {
@@ -44,7 +74,17 @@ class ServiceController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * @OA\Get(
+     *     path="/api/v1/services/{service}",
+     *     summary="Get service by ID",
+     *     tags={"Services"},
+     *     security={{"sanctum": {}}},
+     *
+     *     @OA\Parameter(name="service", in="path", required=true, @OA\Schema(type="integer")),
+     *
+     *     @OA\Response(response=200, description="Successful operation"),
+     *     @OA\Response(response=404, description="Service not found")
+     * )
      */
     public function show(int $id): JsonResponse
     {
@@ -54,7 +94,28 @@ class ServiceController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @OA\Put(
+     *     path="/api/v1/services/{service}",
+     *     summary="Update an existing service",
+     *     tags={"Services"},
+     *     security={{"sanctum": {}}},
+     *
+     *     @OA\Parameter(name="service", in="path", required=true, @OA\Schema(type="integer")),
+     *
+     *     @OA\RequestBody(
+     *         required=true,
+     *
+     *         @OA\JsonContent(
+     *
+     *             @OA\Property(property="name", type="string", example="Premium Wash"),
+     *             @OA\Property(property="price", type="number", format="float", example=45.00),
+     *             @OA\Property(property="description", type="string", example="Full interior and exterior cleaning")
+     *         )
+     *     ),
+     *
+     *     @OA\Response(response=200, description="Service updated successfully"),
+     *     @OA\Response(response=404, description="Service not found")
+     * )
      */
     public function update(UpdateServiceRequest $request, int $id): JsonResponse
     {
@@ -64,7 +125,17 @@ class ServiceController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/v1/services/{service}",
+     *     summary="Delete a service",
+     *     tags={"Services"},
+     *     security={{"sanctum": {}}},
+     *
+     *     @OA\Parameter(name="service", in="path", required=true, @OA\Schema(type="integer")),
+     *
+     *     @OA\Response(response=200, description="Service deleted successfully"),
+     *     @OA\Response(response=404, description="Service not found")
+     * )
      */
     public function destroy(int $id): JsonResponse
     {
